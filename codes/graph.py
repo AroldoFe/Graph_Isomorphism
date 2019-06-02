@@ -6,17 +6,20 @@ class Graph:
         self.nodes = []
         self.edges = []
         self.nodes_edges = {}
-  
+    
+    '''
     def __inint__(self, nodes, edges):
         self.add_nodes(nodes)
         self.add_edges(edges)
-  
+    '''
+
     # @Param node é um vértice
     def add_node(self, node):
         if node not in self.nodes:
             self.nodes.append(node)
             self.nodes_edges[node] = []
-  
+
+    # @Param node é um vértice
     def rem_node(self, node):
         self.nodes.remove(node)
         self.nodes_edges.pop(node)
@@ -26,6 +29,7 @@ class Graph:
         for node in nodes:
             self.add_node(node)
 
+    # @Param nodes é um vetor de nodes
     def rem_nodes(self, nodes):
         for node in nodes:
             self.rem_node(node)
@@ -39,7 +43,8 @@ class Graph:
             self.edges.append(edge);
             self.nodes_edges[edge[0]].append(edge)
             self.nodes_edges[edge[1]].append(edge)
-  
+
+    # @Param edge é uma tupla de vértices
     def rem_edge(self, edge):
         self.edges.remove(edge);
         self.nodes_edges[edge[0]].remove(edge)
@@ -50,9 +55,66 @@ class Graph:
         for edge in edges:
             self.add_edge(edge)
 
+    # @Param edges é um vetor de tuplas de vértices
     def rem_edges(self, edges):
         for edge in edges:
             self.rem_edge(edge)
 
-    #
-    def
+    # @Return Número de nós
+    def number_of_nodes(self):
+        return len(self.nodes)
+
+    # @Return Se dois grafos tem o mésmo numero de nós
+    def same_number_of_nodes(self, G):
+        if(self.number_of_nodes() == G.number_of_nodes()):
+            return True
+        return False
+
+    # @Return número de arestas
+    def number_of_edges(self):
+        return len(self.edges);
+
+    # @Return True se dois grafos tem mesma quantidade de arestas
+    def same_number_of_edges(self, G):
+        if(self.number_of_edges() == G.number_of_edges()):
+            return True
+        return False
+
+    # @Return sequência de graus
+    def degree_sequence(self):
+        return [len(node) for node in nodes_edges.values()].sort(reverse=True)
+
+    # @Return True se dois grafos tem mesma sequencia de graus
+    def same_degree_sequence(self, G):
+        if not(same_number_of_nodes(self, G)):
+            return False
+            
+        self_degree_seq = self.degree_sequence()
+        G_degree_seq = G.degree_sequence()
+
+        for i in range(self.number_of_nodes()):
+            if(self_degree_seq[i] != G_degree_seq[i]):
+                return False
+
+        return True
+
+    # @Return True se dois grafos são isomorfos
+    def is_isomorphic(self, G):
+        if not(self.same_number_of_nodes(G)):
+            return False
+        if not(self.same_number_of_edges(G)):
+            return False
+        if not(self.same_degree_sequence(G)):
+            return False
+
+        '''
+            Estratégia de Isomorfismo de grafos
+            * Pode fazer um dicionario de vértice com seus vértices adjacentes
+            * Tentar projetar um vértice no de mesmo grau e fazer com seus adjacentes
+
+            * Tentar ligar dois grafos por arestas de modo que todo vértice de um grafo G deve estar ligado a exatamente um vértice de H
+            * Se existe algum nó de G que não está ligado a H, então não são isomorfos
+            * dois vértices x,y serão "isomorfos" se existe ciclo de tamanho 4 passando por 2 arestas de ligação de grafos para todas as arestas de x (exemplo de cubo que o plano da frente é isomoformo ao de trás)
+        '''
+
+        return True
