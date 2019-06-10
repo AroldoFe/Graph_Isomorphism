@@ -82,11 +82,12 @@ class Graph:
 
     # @Return sequência de graus
     def degree_sequence(self):
-        return [len(node) for node in nodes_edges.values()].sort(reverse=True)
+        lista = sorted([len(node) for node in self.nodes_edges.values()],reverse=True)
+        return lista
 
     # @Return True se dois grafos tem mesma sequencia de graus
     def same_degree_sequence(self, G):
-        if not(same_number_of_nodes(self, G)):
+        if not(self.same_number_of_nodes(G)):
             return False
             
         self_degree_seq = self.degree_sequence()
@@ -97,6 +98,15 @@ class Graph:
                 return False
 
         return True
+
+
+    def node_with_a_degree(self, degree):
+        for node in self.nodes_edges.items():
+            if(len(node[1]) == degree):
+                self.rem_node(node[0])
+                return node[0]
+
+        return False
 
     # @Return True se dois grafos são isomorfos
     def is_isomorphic(self, G):
@@ -116,5 +126,12 @@ class Graph:
             * Se existe algum nó de G que não está ligado a H, então não são isomorfos
             * dois vértices x,y serão "isomorfos" se existe ciclo de tamanho 4 passando por 2 arestas de ligação de grafos para todas as arestas de x (exemplo de cubo que o plano da frente é isomoformo ao de trás)
         '''
+        degrees_seq_1 = self.degree_sequence()
+        g1 = self
+
+        for degree in degrees_seq_1:
+            print(g1.node_with_a_degree(degree), 'has a degree equal to ', degree)
+
+
 
         return True
