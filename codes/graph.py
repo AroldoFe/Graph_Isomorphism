@@ -23,6 +23,10 @@ class Graph:
     def rem_node(self, node):
         self.nodes.remove(node)
         self.nodes_edges.pop(node)
+        for no, ed in self.nodes_edges.items():
+            for tup in ed:
+                if(no == tup[0] or no == tup[1]):
+                    self.nodes_edges[no].rem(tup);
 
     # @Param nodes é um vetor de vértices
     def add_nodes(self, nodes):
@@ -99,7 +103,7 @@ class Graph:
 
         return True
 
-
+    # @Return 
     def node_with_a_degree(self, degree):
         for node in self.nodes_edges.items():
             if(len(node[1]) == degree):
@@ -107,6 +111,26 @@ class Graph:
                 return node[0]
 
         return False
+
+    # @Return o nó de maior grau
+    def highest_degree_node(self):
+        highest_degree = 0;
+        highest_node;
+        for node in nodes:
+            if(highest_degree < len(nodes_edges[node])):
+                highest_degree = len(nodes_edges[node])
+                highest_node = node
+
+        return highest_node;
+
+
+    # @Return vértices adjacentes
+    def neighbors_nodes(self, node):
+        list_neighbors = []
+        for neighbor in self.nodes_edges[node]:
+            if(neighbor[0] == node) list_neighbors.append(neighbor[1])
+            elif(neighbor[1] == node) list_neighbors.append(neighbor[0])
+        return list_neighbors
 
     # @Return True se dois grafos são isomorfos
     def is_isomorphic(self, G):
@@ -126,27 +150,29 @@ class Graph:
             * Se existe algum nó de G que não está ligado a H, então não são isomorfos
             * dois vértices x,y serão "isomorfos" se existe ciclo de tamanho 4 passando por 2 arestas de ligação de grafos para todas as arestas de x (exemplo de cubo que o plano da frente é isomoformo ao de trás)
         '''
-        degrees_seq_1 = self.degree_sequence()
-        g1 = self
-        # Dicionário contendo o vértice e seu grau
-        dict1 = {}
-        for degree in degrees_seq_1:
-            dict1[g1.node_with_a_degree(degree)] = degree
         
-        print(dict1)
+        ''' *
+            degrees_seq_1 = self.degree_sequence()
+            g1 = self
+            # Dicionário contendo o vértice e seu grau
+            dict1 = {}
+            for degree in degrees_seq_1:
+                dict1[g1.node_with_a_degree(degree)] = degree
+            
+            print(dict1)
 
-        degrees_seq_2 = G.degree_sequence()
-        g2 = G
-        # Dicionário contendo o vértice e seu grau
-        dict2 = {}
-        for degree in degrees_seq_2:
-            dict2[g2.node_with_a_degree(degree)] = degree
+            degrees_seq_2 = G.degree_sequence()
+            g2 = G
+            # Dicionário contendo o vértice e seu grau
+            dict2 = {}
+            for degree in degrees_seq_2:
+                dict2[g2.node_with_a_degree(degree)] = degree
 
-        print(dict2)
+            print(dict2)
 
-        #Dicionário contendo o mapeamento dos nós/resposta final
-        result = {}
-
+            #Dicionário contendo o mapeamento dos nós/resposta final
+            result = {}
+        * '''
         '''
         Etapas para detectar isomorfismo
 
@@ -166,8 +192,30 @@ class Graph:
                     # ....
 
 
-        print('\nResultado:')
-        print(result)
+        # Desenvolvimento: AROLDO
+        # O mapeamento pode ser obtido por um vetor de tamanho len(self.nodes) com tuplas de vértices de G projetados em vértices de H
+
+        self_copy = self.copy()
+        G_copy = G.copy()
+
+        # Pegar vértices de maior grau
+        v1 = self_copy.highest_degree_node()
+        v2 = G_copy.highest_degree_node()
+
+        # Eles tem mesma quantidade de adjacentes? Provavelmente sim ou seria pego no same_degree_sequence.
+        if not(len(self_copy.nodes_edges[v1]) == len(G_copy.nodes_edges[v2])):
+            return False
+
+        nodes_bijection = [(v1,v2)]
+        # Se tiverem mesma quantidade de adjacentes, qual o vetor de grau dos filhos?
+        while(len(nodes_bijection) != len(self.nodes)):
+            # 1) v1 tem mesma quantidade de descendentes que v2? Se sim, pego os adjacentes a v1 e v2 e removo v1 e v2 dos grafos
+            # 2) Qual filho de v1 tem mais descendentes? Qual o filho de v2 tem mais descendentes?
+            # 3) Estes têm mesma quantidade de descendentes? Se sim, repete o passo 1. Se não
+
+
+        print('\nResultado: {}'.format(result))
+        #print(result)
 
 
 
