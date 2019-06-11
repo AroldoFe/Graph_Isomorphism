@@ -128,9 +128,43 @@ class Graph:
         '''
         degrees_seq_1 = self.degree_sequence()
         g1 = self
-
+        # Dicionário contendo o vértice e seu grau
+        dict1 = {}
         for degree in degrees_seq_1:
-            print(g1.node_with_a_degree(degree), 'has a degree equal to ', degree)
+            dict1[g1.node_with_a_degree(degree)] = degree
+        
+        print(dict1)
+
+        degrees_seq_2 = G.degree_sequence()
+        g2 = G
+        # Dicionário contendo o vértice e seu grau
+        dict2 = {}
+        for degree in degrees_seq_2:
+            dict2[g2.node_with_a_degree(degree)] = degree
+
+        print(dict2)
+
+        #Dicionário contendo o mapeamento dos nós/resposta final
+        result = {}
+
+        '''
+        Etapas para detectar isomorfismo
+
+            1. Checar se para cada nó existe um nó correspondente no outro grafo de mesmo grau
+
+            2. Verificar se os vizinhos de ambos os nós possuem mesmo grau
+
+            Em caso positivo, ambos os nós precisam sair da iteração, para não haver dois nós mapeados para um mesmo nó
+        '''
+
+        # Mapeando nós
+        for node1 in dict1.items():
+            for node2 in dict2.items():
+                if node1[1] == node2[1]:
+                    result[node1[0]] = node2[0]
+
+        print('\nResultado:')
+        print(result)
 
 
 
