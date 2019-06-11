@@ -160,8 +160,11 @@ class Graph:
         # Mapeando nós
         for node1 in dict1.items():
             for node2 in dict2.items():
-                if node1[1] == node2[1]:
+                if node1[1] == node2[1] and node2[0] not in result.values():
                     result[node1[0]] = node2[0]
+                    #Verificar os vizinhos
+                    # ....
+
 
         print('\nResultado:')
         print(result)
