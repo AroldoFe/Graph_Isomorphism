@@ -151,28 +151,28 @@ class Graph:
             * dois vértices x,y serão "isomorfos" se existe ciclo de tamanho 4 passando por 2 arestas de ligação de grafos para todas as arestas de x (exemplo de cubo que o plano da frente é isomoformo ao de trás)
         '''
         
-        ''' *
-            degrees_seq_1 = self.degree_sequence()
-            g1 = self
-            # Dicionário contendo o vértice e seu grau
-            dict1 = {}
-            for degree in degrees_seq_1:
-                dict1[g1.node_with_a_degree(degree)] = degree
-            
-            print(dict1)
 
-            degrees_seq_2 = G.degree_sequence()
-            g2 = G
-            # Dicionário contendo o vértice e seu grau
-            dict2 = {}
-            for degree in degrees_seq_2:
-                dict2[g2.node_with_a_degree(degree)] = degree
+        degrees_seq_1 = self.degree_sequence()
+        g1 = self
+        # Dicionário contendo o vértice e seu grau
+        dict1 = {}
+        for degree in degrees_seq_1:
+            dict1[g1.node_with_a_degree(degree)] = degree
+        
+        print(dict1)
 
-            print(dict2)
+        degrees_seq_2 = G.degree_sequence()
+        g2 = G
+        # Dicionário contendo o vértice e seu grau
+        dict2 = {}
+        for degree in degrees_seq_2:
+            dict2[g2.node_with_a_degree(degree)] = degree
 
-            #Dicionário contendo o mapeamento dos nós/resposta final
-            result = {}
-        * '''
+        print(dict2)
+
+        #Dicionário contendo o mapeamento dos nós/resposta final
+        result = {}
+    
         '''
         Etapas para detectar isomorfismo
 
