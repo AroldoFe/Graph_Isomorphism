@@ -123,13 +123,25 @@ class Graph:
 
         return highest_node;
 
+    # @Return o nó de maior grau
+    def highest_degree_node_from_list(self, lista):
+        highest_degree = 0;
+        highest_node;
+        for node in nodes:
+            if node in lista:
+                if(highest_degree < len(nodes_edges[node])):
+                    highest_degree = len(nodes_edges[node])
+                    highest_node = node
+
+        return highest_node;
+
 
     # @Return vértices adjacentes
     def neighbors_nodes(self, node):
         list_neighbors = []
         for neighbor in self.nodes_edges[node]:
-            if(neighbor[0] == node) list_neighbors.append(neighbor[1])
-            elif(neighbor[1] == node) list_neighbors.append(neighbor[0])
+            if(neighbor[0] == node): list_neighbors.append(neighbor[1])
+            elif(neighbor[1] == node): list_neighbors.append(neighbor[0])
         return list_neighbors
 
     # @Return True se dois grafos são isomorfos
@@ -210,9 +222,16 @@ class Graph:
         # Se tiverem mesma quantidade de adjacentes, qual o vetor de grau dos filhos?
         while(len(nodes_bijection) != len(self.nodes)):
             # 1) v1 tem mesma quantidade de descendentes que v2? Se sim, pego os adjacentes a v1 e v2 e removo v1 e v2 dos grafos
+            if len(self_copy.neighbors_nodes(v1)) == len(G_copy.neighbors_nodes(v2)):
+                adj1 = self_copy.neighbors_nodes(v1)
+                adj2 = G_copy.neighbors_nodes(v2)
+                self_copy.rem_node(v1)
+                G_copy.rem_node()
             # 2) Qual filho de v1 tem mais descendentes? Qual o filho de v2 tem mais descendentes?
+                v1_son = self_copy.highest_degree_node_from_list(adj1)
+                v2_son = G_copy.highest_degree_node_from_list(adj2)
             # 3) Estes têm mesma quantidade de descendentes? Se sim, repete o passo 1. Se não
-
+                if len(self_copy.neighbors_nodes(v1_son)) == len(G_copy.neighbors_nodes(v2_son)):
 
         print('\nResultado: {}'.format(result))
         #print(result)
