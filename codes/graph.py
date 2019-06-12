@@ -135,6 +135,28 @@ class Graph:
 
         return highest_node;
 
+    # @Return Lista de adjacencia
+    def adjacency_list(self):
+        adjacency = {node: {'neighbors':self.neighbors_nodes(self, node), 'number_of_descendants':0} for node in self.nodes_edges.keys()}
+
+    # @Return dicionário com chaves sendo nós e valores sendo a quantidade de descendentes de cada nó
+    def number_of_descendants(self):
+        visited = []
+        non_visited = self.nodes.copy()
+        self_adjacency = self.adjacency_list() # Dicionario
+        # Para cada nó calcular 
+
+        for n in self_adjacency:
+            if(self_adjacency[n]['number_of_descendants'] != 0):
+                descendants_of_n = 0
+                for neighbor in self_adjacency[n]['neighbors']:
+                    if(neighbor not in visited):
+                        non_visited.remove(neighbor);
+                        visited.append(neighbor);
+                        # calcular número de descendentes de neighbor
+
+
+
 
     # @Return vértices adjacentes
     def neighbors_nodes(self, node):
@@ -226,7 +248,7 @@ class Graph:
                 adj1 = self_copy.neighbors_nodes(v1)
                 adj2 = G_copy.neighbors_nodes(v2)
                 self_copy.rem_node(v1)
-                G_copy.rem_node()
+                G_copy.rem_node(v2)
             # 2) Qual filho de v1 tem mais descendentes? Qual o filho de v2 tem mais descendentes?
                 v1_son = self_copy.highest_degree_node_from_list(adj1)
                 v2_son = G_copy.highest_degree_node_from_list(adj2)
