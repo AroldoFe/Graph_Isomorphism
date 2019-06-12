@@ -1,6 +1,8 @@
 # @Param nodes é um conjunto de Vértices
 # @Param edges é um conjunto de arestas, ou seja, tuplas de Vértices
 
+from copy import deepcopy
+
 class Graph:
     def __init__(self):
         self.nodes = []
@@ -26,7 +28,7 @@ class Graph:
         for no, ed in self.nodes_edges.items():
             for tup in ed:
                 if(no == tup[0] or no == tup[1]):
-                    self.nodes_edges[no].rem(tup);
+                    self.nodes_edges[no].remove(tup);
 
     # @Param nodes é um vetor de vértices
     def add_nodes(self, nodes):
@@ -115,10 +117,10 @@ class Graph:
     # @Return o nó de maior grau
     def highest_degree_node(self):
         highest_degree = 0;
-        highest_node;
-        for node in nodes:
-            if(highest_degree < len(nodes_edges[node])):
-                highest_degree = len(nodes_edges[node])
+        highest_node = None;
+        for node in self.nodes:
+            if(highest_degree < len(self.nodes_edges[node])):
+                highest_degree = len(self.nodes_edges[node])
                 highest_node = node
 
         return highest_node;
@@ -185,7 +187,7 @@ class Graph:
             * dois vértices x,y serão "isomorfos" se existe ciclo de tamanho 4 passando por 2 arestas de ligação de grafos para todas as arestas de x (exemplo de cubo que o plano da frente é isomoformo ao de trás)
         '''
         
-
+        '''
         degrees_seq_1 = self.degree_sequence()
         g1 = self
         # Dicionário contendo o vértice e seu grau
@@ -203,11 +205,11 @@ class Graph:
             dict2[g2.node_with_a_degree(degree)] = degree
 
         print(dict2)
-
+        
         #Dicionário contendo o mapeamento dos nós/resposta final
         result = {}
-    
-        '''
+
+
         Etapas para detectar isomorfismo
 
             1. Checar se para cada nó existe um nó correspondente no outro grafo de mesmo grau
@@ -215,7 +217,7 @@ class Graph:
             2. Verificar se os vizinhos de ambos os nós possuem mesmo grau
 
             Em caso positivo, ambos os nós precisam sair da iteração, para não haver dois nós mapeados para um mesmo nó
-        '''
+        
 
         # Mapeando nós
         for node1 in dict1.items():
@@ -224,8 +226,31 @@ class Graph:
                     result[node1[0]] = node2[0]
                     #Verificar os vizinhos
                     # ....
+        '''
+
+        '''
+        # Desenvolvimento: GABRIEL
+        self_copy = deepcopy(self)
+        G_copy = deepcopy(G)
+
+        # Conferindo se o grafo realmente foi copiado
+        #for key,value in self_copy.nodes_edges.items():
+        #    print("{}: {}".format(key, value))
+        
+        
+        # Pegar vértices de maior grau
+        v1 = self_copy.highest_degree_node()
+        v2 = G_copy.highest_degree_node()
 
 
+        nodes_bijection = [(v1,v2)]        
+        while(len(nodes_bijection) != len(self.nodes)):
+            if len(self_copy.neighbors_nodes(v1)) == len(G_copy.neighbors_nodes(v2)):
+                self_copy.rem_node(v1)
+                G_copy.rem_node(v2)
+        '''
+        
+        
         # Desenvolvimento: AROLDO
         # O mapeamento pode ser obtido por um vetor de tamanho len(self.nodes) com tuplas de vértices de G projetados em vértices de H
 
@@ -257,7 +282,7 @@ class Graph:
 
         print('\nResultado: {}'.format(result))
         #print(result)
-
+        
 
 
         return True
