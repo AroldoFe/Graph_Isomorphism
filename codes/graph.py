@@ -142,7 +142,7 @@ class Graph:
         adjacency = {node: {'neighbors':self.neighbors_nodes(self, node), 'number_of_descendants':0} for node in self.nodes_edges.keys()}
 
     # @Return dicionário com chaves sendo nós e valores sendo a quantidade de descendentes de cada nó
-    def number_of_descendants(self):
+    '''    def number_of_descendants(self):
         visited = []
         non_visited = self.nodes.copy()
         self_adjacency = self.adjacency_list() # Dicionario
@@ -156,8 +156,17 @@ class Graph:
                         non_visited.remove(neighbor);
                         visited.append(neighbor);
                         # calcular número de descendentes de neighbor
+    '''
 
 
+    def nodes_same_degree(self, degree):
+        return [key for key,item in self.nodes_edges.items() if len(item) == degree]
+
+    def init_highest_degree(self, H):
+        degree = self.degree_sequence()[0]
+        G_degrees = self.nodes_same_degree(degree)
+        H_degrees = H.nodes_same_degree(degree)
+        return G_degrees, H_degrees
 
 
     # @Return vértices adjacentes
@@ -169,12 +178,12 @@ class Graph:
         return list_neighbors
 
     # @Return True se dois grafos são isomorfos
-    def is_isomorphic(self, G):
-        if not(self.same_number_of_nodes(G)):
+    def is_isomorphic(self, H):
+        if not(self.same_number_of_nodes(H)):
             return False
-        if not(self.same_number_of_edges(G)):
+        if not(self.same_number_of_edges(H)):
             return False
-        if not(self.same_degree_sequence(G)):
+        if not(self.same_degree_sequence(H)):
             return False
 
         '''
@@ -188,101 +197,139 @@ class Graph:
         '''
         
         '''
-        degrees_seq_1 = self.degree_sequence()
-        g1 = self
-        # Dicionário contendo o vértice e seu grau
-        dict1 = {}
-        for degree in degrees_seq_1:
-            dict1[g1.node_with_a_degree(degree)] = degree
-        
-        print(dict1)
+            degrees_seq_1 = self.degree_sequence()
+            g1 = self
+            # Dicionário contendo o vértice e seu grau
+            dict1 = {}
+            for degree in degrees_seq_1:
+                dict1[g1.node_with_a_degree(degree)] = degree
+            
+            print(dict1)
 
-        degrees_seq_2 = G.degree_sequence()
-        g2 = G
-        # Dicionário contendo o vértice e seu grau
-        dict2 = {}
-        for degree in degrees_seq_2:
-            dict2[g2.node_with_a_degree(degree)] = degree
+            degrees_seq_2 = G.degree_sequence()
+            g2 = G
+            # Dicionário contendo o vértice e seu grau
+            dict2 = {}
+            for degree in degrees_seq_2:
+                dict2[g2.node_with_a_degree(degree)] = degree
 
-        print(dict2)
-        
-        #Dicionário contendo o mapeamento dos nós/resposta final
-        result = {}
+            print(dict2)
+            
+            #Dicionário contendo o mapeamento dos nós/resposta final
+            result = {}
 
 
-        Etapas para detectar isomorfismo
+            Etapas para detectar isomorfismo
 
-            1. Checar se para cada nó existe um nó correspondente no outro grafo de mesmo grau
+                1. Checar se para cada nó existe um nó correspondente no outro grafo de mesmo grau
 
-            2. Verificar se os vizinhos de ambos os nós possuem mesmo grau
+                2. Verificar se os vizinhos de ambos os nós possuem mesmo grau
 
-            Em caso positivo, ambos os nós precisam sair da iteração, para não haver dois nós mapeados para um mesmo nó
-        
+                Em caso positivo, ambos os nós precisam sair da iteração, para não haver dois nós mapeados para um mesmo nó
+            
 
-        # Mapeando nós
-        for node1 in dict1.items():
-            for node2 in dict2.items():
-                if node1[1] == node2[1] and node2[0] not in result.values():
-                    result[node1[0]] = node2[0]
-                    #Verificar os vizinhos
-                    # ....
+            # Mapeando nós
+            for node1 in dict1.items():
+                for node2 in dict2.items():
+                    if node1[1] == node2[1] and node2[0] not in result.values():
+                        result[node1[0]] = node2[0]
+                        #Verificar os vizinhos
+                        # ....
         '''
 
         '''
-        # Desenvolvimento: GABRIEL
-        self_copy = deepcopy(self)
-        G_copy = deepcopy(G)
+            # Desenvolvimento: GABRIEL
+            G_copy = deepcopy(self)
+            H_copy = deepcopy(G)
 
-        # Conferindo se o grafo realmente foi copiado
-        #for key,value in self_copy.nodes_edges.items():
-        #    print("{}: {}".format(key, value))
-        
-        
-        # Pegar vértices de maior grau
-        v1 = self_copy.highest_degree_node()
-        v2 = G_copy.highest_degree_node()
+            # Conferindo se o grafo realmente foi copiado
+            #for key,value in G_copy.nodes_edges.items():
+            #    print("{}: {}".format(key, value))
+            
+            
+            # Pegar vértices de maior grau
+            v1 = G_copy.highest_degree_node()
+            v2 = H_copy.highest_degree_node()
 
 
-        nodes_bijection = [(v1,v2)]        
-        while(len(nodes_bijection) != len(self.nodes)):
-            if len(self_copy.neighbors_nodes(v1)) == len(G_copy.neighbors_nodes(v2)):
-                self_copy.rem_node(v1)
-                G_copy.rem_node(v2)
+            nodes_bijection = [(v1,v2)]        
+            while(len(nodes_bijection) != len(self.nodes)):
+                if len(G_copy.neighbors_nodes(v1)) == len(H_copy.neighbors_nodes(v2)):
+                    G_copy.rem_node(v1)
+                    H_copy.rem_node(v2)
         '''
         
         
         # Desenvolvimento: AROLDO
         # O mapeamento pode ser obtido por um vetor de tamanho len(self.nodes) com tuplas de vértices de G projetados em vértices de H
 
-        self_copy = self.copy()
-        G_copy = G.copy()
+        G_copy = deepcopy(self)
+        H_copy = deepcopy(H)
 
-        # Pegar vértices de maior grau
-        v1 = self_copy.highest_degree_node()
-        v2 = G_copy.highest_degree_node()
+        visited = {'G':[],'H':[]}
+        non_visited = {'G':G_copy.nodes, 'H':H_copy.nodes}
+        nodes_bijection = []
+        nodes_possibles_bijection = []
 
-        # Eles tem mesma quantidade de adjacentes? Provavelmente sim ou seria pego no same_degree_sequence.
-        if not(len(self_copy.nodes_edges[v1]) == len(G_copy.nodes_edges[v2])):
-            return False
+        # pegas os nós de mesmo grau dado um grau
+        G_highest_nodes_degrees, H_highest_nodes_degrees = G_copy.init_highest_degree(H_copy)
 
-        nodes_bijection = [(v1,v2)]
-        # Se tiverem mesma quantidade de adjacentes, qual o vetor de grau dos filhos?
-        while(len(nodes_bijection) != len(self.nodes)):
-            # 1) v1 tem mesma quantidade de descendentes que v2? Se sim, pego os adjacentes a v1 e v2 e removo v1 e v2 dos grafos
-            if len(self_copy.neighbors_nodes(v1)) == len(G_copy.neighbors_nodes(v2)):
-                adj1 = self_copy.neighbors_nodes(v1)
-                adj2 = G_copy.neighbors_nodes(v2)
-                self_copy.rem_node(v1)
-                G_copy.rem_node(v2)
-            # 2) Qual filho de v1 tem mais descendentes? Qual o filho de v2 tem mais descendentes?
-                v1_son = self_copy.highest_degree_node_from_list(adj1)
-                v2_son = G_copy.highest_degree_node_from_list(adj2)
-            # 3) Estes têm mesma quantidade de descendentes? Se sim, repete o passo 1. Se não
-                if len(self_copy.neighbors_nodes(v1_son)) == len(G_copy.neighbors_nodes(v2_son)):
+        # Fazendo combinação de quais nós podem se combinar com quais
+        for G_node in G_highest_nodes_degrees:
+            for H_node in H_highest_nodes_degrees:
+                nodes_possibles_bijection.append((G_node,H_node))
 
-        print('\nResultado: {}'.format(result))
-        #print(result)
+        #nodes_bijection.append(nodes_possibles_bijection[0])
+        #nodes_possibles_bijection.pop(0)
+
+        #
+        for pack in nodes_possibles_bijection:
+            v1 = pack[0]
+            v2 = pack[1]
+            # Listas contenco nós adjacentes a v1, v2 respectivamente
+            v1_neighbors = G_copy.neighbors_nodes(v1)
+            v2_neighbors = H_copy.neighbors_nodes(v2)
+            # sequencias de graus
+            v1_neighbors_degree = sorted([len(G_copy.nodes_edges[key]) for key in v1_neighbors], reverse=True)
+            v2_neighbors_degree = sorted([len(H_copy.nodes_edges[key]) for key in v2_neighbors], reverse=True)
+            # Essas sequencias são iguais
+            iguais = True
+            for i in range(len(v1_neighbors_degree)):
+                if(v1_neighbors_degree[i] != v2_neighbors_degree[i]):
+                    iguais = False
+                    break;
+
+            if not(iguais):
+                continue
+
+            # Se forem iguais começa a fazer a bijeção
+            nodes_bijection.append(pack);
+            
+
+
+
+        '''
+            # Pegar vértices de maior grau
+            v1 = G_copy.highest_degree_node()
+            v2 = H_copy.highest_degree_node()
         
+            # Se tiverem mesma quantidade de adjacentes, qual o vetor de grau dos filhos?
+            while(len(nodes_bijection) != len(self.nodes)):
+                # 1) v1 tem mesma quantidade de descendentes que v2? Se sim, pego os adjacentes a v1 e v2 e removo v1 e v2 dos grafos
+                if len(G_copy.neighbors_nodes(v1)) == len(H_copy.neighbors_nodes(v2)):
+                    adj1 = G_copy.neighbors_nodes(v1)
+                    adj2 = H_copy.neighbors_nodes(v2)
+                    G_copy.rem_node(v1)
+                    H_copy.rem_node(v2)
+                # 2) Qual filho de v1 tem mais descendentes? Qual o filho de v2 tem mais descendentes?
+                    v1_son = G_copy.highest_degree_node_from_list(adj1)
+                    v2_son = H_copy.highest_degree_node_from_list(adj2)
+                # 3) Estes têm mesma quantidade de descendentes? Se sim, repete o passo 1. Se não
+                    if len(G_copy.neighbors_nodes(v1_son)) == len(H_copy.neighbors_nodes(v2_son)):
 
+            print('\nResultado: {}'.format(result))
+            #print(result)
+        
+        '''
 
         return True
