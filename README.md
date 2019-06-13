@@ -48,7 +48,11 @@ $ python3.6 main.py
 
 ## Observações
 
-Por tratar-se de um problema singular dentro do universo da computação, diversos problemas foram enfrentados durante o desenvolvimento do projeto. Tentou-se desenvolver uma solução por diferentes abordagens, mas sem sucesso. Entretanto, optou-se por deixar a pasta "adjacency" no projeto, a título de curiosidade. Essa pasta contém códigos nos quais tentou-se definir o isomorfismo entre grafos através do uso de matriz de adjacẽncias e de uma matriz de permutação. A explicação desta heurística está melhor explicada no relatório entregue. Portanto, salientando, a pasta que contém os códigos que devem ser usados para a execução de fato do programa estão na pasta "codes", assim como foi descrito nas Instruções acima.
+1. Medidas para impedir ou corrigir o usuário caso informações erradas sejam inseridas pelo usuário, não foram implementadas. Logo, é natural que caso erre a escrita de um arquivo, erros sejam apresentados no terminal. Basta digitar nomes de arquivos existentes na pasta "compostos" que o programa irá executar normalmente.
+
+2. Como caso de teste inicial, é sugerido utilizar os arquivo dos compostos "metano.txt" e "silano.txt", que são mais simples, para facilitar o entendimento do funcionamento do programa.
+
+3. Por tratar-se de um problema singular dentro do universo da computação, diversos problemas foram enfrentados durante o desenvolvimento do projeto. Tentou-se desenvolver uma solução por diferentes abordagens, mas sem sucesso. Entretanto, optou-se por deixar a pasta "adjacency" no projeto, a título de curiosidade. Essa pasta contém códigos nos quais tentou-se definir o isomorfismo entre grafos através do uso de matriz de adjacẽncias e de uma matriz de permutação. A explicação desta heurística está melhor explicada no relatório entregue. Portanto, salientando, a pasta que contém os códigos que devem ser usados para a execução de fato do programa estão na pasta "codes", assim como foi descrito nas Instruções acima.
 
 
 ## Autores
