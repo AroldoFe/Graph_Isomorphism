@@ -1,2 +1,0 @@
-a,b;a,g;a,c;b,d;b,h;h,g;h,f;g,e;e,c;e,f;f,d;c,d
-a,b;a,c;a,f;b,g;b,d;c,d;c,e;d,h;e,f;e,h;f,g;g,h
