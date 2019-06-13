@@ -2,7 +2,6 @@ from graph import Graph;
 from files import file_to_list;
 from files import read_file;
 import os
-#import files;
 print('##### ISOMORFISMO DE GRAFOS APLICADOS A QUÍMICA #####\n')
 
 print('# Este programa tem como objetivo avaliar se duas estruturas químicas são isomorfas ou não\n')
@@ -60,22 +59,40 @@ print()
 
 resultado = graph1.is_isomorphic(graph2)
 
-relatorio.append(" ")
-relatorio.append("Resultado: ")
+if resultado != False:
+	relatorio.append(" ")
+	relatorio.append("Resultado: ")
 
-for key, item in resultado.items():
-	string3 = "{}: {}".format(key, item)
-	relatorio.append(string3)
+	for key, item in resultado.items():
+		string3 = "{}: {}".format(key, item)
+		relatorio.append(string3)
 
-nome_do_arquivo_de_output = input("\nInsira nome do arquivo (digite .txt ao final do nome): ")
+	nome_do_arquivo_de_output = input("\nInsira nome do arquivo do relatório (digite .txt ao final do nome): ")
 
-f = open(nome_do_arquivo_de_output, "x")
-f.close()
+	f = open(nome_do_arquivo_de_output, "x")
+	f.close()
 
-f1 = open(nome_do_arquivo_de_output, "w")
-for item in relatorio:
-	f1.write(item)
-	f1.write("\n")
-f1.close()
+	f1 = open(nome_do_arquivo_de_output, "w")
+	for item in relatorio:
+		f1.write(item)
+		f1.write("\n")
+	f1.close()
+else: 
+	print ("## ESTRUTURAS SÃO DIFERENTES, COMPOSTOS NÃO SÃO ISOMORFOS")
+	relatorio.append(" ")
+	relatorio.append("## ESTRUTURAS SÃO DIFERENTES, COMPOSTOS NÃO SÃO ISOMORFOS")
+	nome_do_arquivo_de_output = input("\nInsira nome do arquivo do relatório (digite .txt ao final do nome): ")
+
+	f = open(nome_do_arquivo_de_output, "x")
+	f.close()
+
+	f1 = open(nome_do_arquivo_de_output, "w")
+	for item in relatorio:
+		f1.write(item)
+		f1.write("\n")
+	f1.close()
+
+
+
 
 print("\n## RELATÓRIO CRIADO E PROGRAMA ENCERRADO ##")

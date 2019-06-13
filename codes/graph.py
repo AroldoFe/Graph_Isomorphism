@@ -134,28 +134,6 @@ class Graph:
 
         return highest_node;
 
-    # @Return Lista de adjacencia
-    def adjacency_list(self):
-        adjacency = {node: {'neighbors':self.neighbors_nodes(self, node), 'number_of_descendants':0} for node in self.nodes_edges.keys()}
-
-    # @Return dicionário com chaves sendo nós e valores sendo a quantidade de descendentes de cada nó
-    '''    def number_of_descendants(self):
-        visited = []
-        non_visited = self.nodes.copy()
-        self_adjacency = self.adjacency_list() # Dicionario
-        # Para cada nó calcular 
-
-        for n in self_adjacency:
-            if(self_adjacency[n]['number_of_descendants'] != 0):
-                descendants_of_n = 0
-                for neighbor in self_adjacency[n]['neighbors']:
-                    if(neighbor not in visited):
-                        non_visited.remove(neighbor);
-                        visited.append(neighbor);
-                        # calcular número de descendentes de neighbor
-    '''
-
-
     def nodes_same_degree(self, degree):
         return [key for key,item in self.nodes_edges.items() if len(item) == degree]
 
@@ -164,7 +142,6 @@ class Graph:
         G_degrees = self.nodes_same_degree(degree)
         H_degrees = H.nodes_same_degree(degree)
         return G_degrees, H_degrees
-
 
     # @Return vértices adjacentes
     def neighbors_nodes(self, node):
@@ -217,7 +194,4 @@ class Graph:
 
         return result
         
-        
-
-
-        #eturn True
+    
