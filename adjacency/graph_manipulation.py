@@ -1,7 +1,14 @@
 from matrix_manipulation import create_adjacency
 from matrix_manipulation import show_matrix
+from matrix_manipulation import create_p
+from matrix_manipulation import transpose
+from matrix_manipulation import matrix_multiply
+from matrix_manipulation import matrix_equals
+
 from copy import deepcopy
 import itertools
+#import numpy as np
+from numpy import array
 
 def degree_seguence(G):
 	return sorted([len(G[node]) for node in G.keys()], reverse=True)
@@ -43,34 +50,44 @@ def all_to_str(list_int):
 		string += '{};'.format(i)'''
 	return [str(item) for item in list_int]
 
-def create_permutation(first, second, f_degree, s_degree):
-	# Suponto first vetor de strings e second vetor de vértices
-	permutations = []
+def recursive_unpacking(tup):
+	if(isinstance(tup[0], int) and isinstance(tup[1], int)):
+		return '{},{}'.format(tup[0],tup[1])
+	else:
+		return recursive_unpacking(tup[0]) + ',' + str(tup[1])
 
-	for perm in itertools.product(first,second):
-		if(perm[0].split(',')[-1] != str(perm[1])):
-			permutations.append(perm[0]+str(perm[1]))
-			
-	return permutations
+def tuples_to_list(permutations):
+	final_permutations = []
+	for ind, value in enumerate(permutations):
+		final_permutations.append(recursive_unpacking(value))
+		final_permutations[-1] = final_permutations[-1].split(',')
+		final_permutations[-1] = [int(i) for i in final_permutations[-1]]
 
+	return final_permutations
+
+def remove_tuples(permutations, num_of_nodes):
+	final_permutations = []
+	for value in permutations:
+		if(len(set(value)) == num_of_nodes):
+			final_permutations.append(value)
+	return final_permutations
 
 def create_permutations(G):
 
 	G_deg_seq = degree_sequence(G)
-	f_degree = G_deg_seq[0]
-	first = [all_to_str(nodes_with_degree(G, f_degree))]
+	first = nodes_with_degree(G, G_deg_seq[0])
 	G_deg_seq.pop(0)
 
 	while(len(G_deg_seq) > 0):
-		s_degree = G_deg_seq[0]
-		second = nodes_with_degree(G, s_degree)
+		second = nodes_with_degree(G, G_deg_seq[0])
 		G_deg_seq.pop(0)
-		first = create_permutation(first, second, f_degree, s_degree)
-		f_degree = s_degree
+		first = itertools.product(first,second)
 
-	print(first)
+	permutations = tuples_to_list(first)
 
-	return first
+	permutations = remove_tuples(permutations, len(G))
+
+	return permutations
 
 def create_alphas(G, H):
 	alphas = []
@@ -87,8 +104,6 @@ def create_alphas(G, H):
 
 	return alphas
 
-
-
 def are_isomorphic(G, H):
 	if not(same_number_of_nodes(G,H)):
 		return False
@@ -100,22 +115,22 @@ def are_isomorphic(G, H):
 	# Criar os alphas a partir das sequencias de graus
 
 	G_max_num = sorted(list(G.keys()))[-1]
-	G_adj = create_adjacency(G, G_max_num+1)
+	G_adj = array(create_adjacency(G, G_max_num+1))
 
 	H_max_num = sorted(list(H.keys()))[-1]
-	H_adj = create_adjacency(H, H_max_num+1)
+	H_adj = array(create_adjacency(H, H_max_num+1))
 
 	alphas = create_alphas(G, H)
-
-	#for alpha in alphas:
-		#print(alpha)
-	'''
+	
 	for alpha in alphas: # O(N!)
-		P = create_p(alpha)
+		P = array(create_p(alpha))
 		P_trans = transpose(P)
 		
-		test_equals_G_adj = matrix_multiply(matrix_multiply(P,H_adj),P_trans)
+		P_H_adj = matrix_multiply(P,H_adj)
+		test_equals_G_adj = matrix_multiply(P_H_adj,P_trans)
+
 		if(matrix_equals(G_adj, test_equals_G_adj)):
-			return alpha
-	'''
+			#return alpha
+			return True
+	
 	return False
