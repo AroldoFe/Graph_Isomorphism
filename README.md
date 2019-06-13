@@ -35,7 +35,7 @@ Obs: Devido as atualizações nos sistemas operacionais, as instruções para in
 
 3. Agora com o python 3 devidamente instalado, entre no repositório do projeto através do terminal e insira os seguintes comandos:
 ```bash
-$ cd codes
+$ cd codes/
 ```
 4. Dentro da pasta dos códigos, basta executar o programa. Entretanto, dependendo da sua versão do sistema operacional, a execução pode ser feita de duas formas. Logo, basta testar e ver qual das formas funciona.
 ```bash
@@ -57,7 +57,7 @@ $ python3.6 main.py
 
 ## Autores
 
-Projeto desenvolvido pelos alunos
+Projeto desenvolvido pelos alunos:
 
 - 20170099774 - Aroldo Felix
 - 20170000600 - Gabriel Igor
