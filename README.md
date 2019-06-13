@@ -6,7 +6,7 @@ Este repositório contém os arquivos correspondentes ao trabalho da terceira un
 
 O presente trabalho possui o objetivo de comparar estruturas químicas, representadas através de grafos, de modo a avaliar se elas possivelmente são isomorfas ou não.
 
-## Instruções
+## Instruções para o algoritmo da pasta codes
 
 O projeto foi desenvolvido considerando-se que será executado em ambiente Linux.
 
@@ -46,13 +46,35 @@ Ou:
 $ python3.6 main.py
 ```
 
+## Instruções para o algoritmo da pasta adjacency
+
+O algoritmo da pasta adjacency além de exigir o python 3 (seguindo os mesmo passos da seção anterior), ele também necessita da instalação do numpy
+
+1. Para instalar o numpy, digite primeiramente no terminal:
+```bash
+$ sudo apt install python3-pip
+$ pip3 install numpy
+```
+
+2. Com o numpy instalado, basta entrar na pasta adjacency com o comando:
+```bash
+$ cd adjacency/
+```
+
+3. Dentro da pasta 'adjacency' basta executar o programa. Entretanto, dependendo da sua versão do sistema operacional, a execução pode ser feita de duas formas. Logo, basta testar e ver qual das formas funciona.
+```bash
+$ python3 main.py
+```
+Ou:
+```bash
+$ python3.6 main.py
+```
+
 ## Observações
 
 1. Medidas para impedir ou corrigir o usuário caso informações erradas sejam inseridas pelo usuário, não foram implementadas. Logo, é natural que caso erre a escrita de um arquivo, erros sejam apresentados no terminal. Basta digitar nomes de arquivos existentes na pasta "compostos" que o programa irá executar normalmente.
 
-2. Como caso de teste inicial, é sugerido utilizar os arquivo dos compostos "metano.txt" e "silano.txt", que são mais simples, para facilitar o entendimento do funcionamento do programa.
-
-3. Por tratar-se de um problema singular dentro do universo da computação, diversos problemas foram enfrentados durante o desenvolvimento do projeto. Tentou-se desenvolver uma solução por diferentes abordagens, mas sem sucesso. Entretanto, optou-se por deixar a pasta "adjacency" no projeto, a título de curiosidade. Essa pasta contém códigos nos quais tentou-se definir o isomorfismo entre grafos através do uso de matriz de adjacẽncias e de uma matriz de permutação. A explicação desta heurística está melhor explicada no relatório entregue. Portanto, salientando, a pasta que contém os códigos que devem ser usados para a execução de fato do programa estão na pasta "codes", assim como foi descrito nas Instruções acima.
+2. Como caso de teste inicial, para a pasta codes, é sugerido utilizar os arquivo dos compostos "metano.txt" e "silano.txt", que são mais simples, para facilitar o entendimento do funcionamento do programa.
 
 
 ## Autores
