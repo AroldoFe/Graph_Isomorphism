@@ -2,6 +2,8 @@ from files_manipulation import read_file
 from files_manipulation import file_to_list
 from graph_manipulation import are_isomorphic
 from copy import deepcopy
+import itertools
+
 def main():
 	arquivo1 = read_file();
 	G = file_to_list(arquivo1)
@@ -35,4 +37,25 @@ if __name__ == '__main__':
 
 	print(permutation)'''
 	main()
+	'''
+	a = [1,2,3,4]
+	b = a
+	resposta =
+	for i in range(len(a)):
+		a = itertools.product(a,b)
+	
+	for i in a:
+		print(i)
+	'''
+	'''a = [1,2,3,4]
+	b = a
+	resposta = []
+	for j in range(len(a)):
+		for i in itertools.product(a,b):
+			resposta.append('{},{}'.format(i[0],i[1]))
+			a = itertools.product(a,b)
 
+	
+	for i in resposta:
+		print(i)
+	'''

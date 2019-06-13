@@ -1,6 +1,7 @@
 from matrix_manipulation import create_adjacency
 from matrix_manipulation import show_matrix
 from copy import deepcopy
+import itertools
 
 def degree_seguence(G):
 	return sorted([len(G[node]) for node in G.keys()], reverse=True)
@@ -37,37 +38,27 @@ def nodes_with_degree(G, degree):
 	return [node for node in G if(len(G[node]) == degree)]
 
 def all_to_str(list_int):
-	string = ''
+	'''string = ''
 	for i in list_int:
-		string += '{};'.format(i)
-	return string
+		string += '{};'.format(i)'''
+	return [str(item) for item in list_int]
 
 def create_permutation(first, second, f_degree, s_degree):
-	if(f_degree != s_degree):
-		for i in range(len(second)):
-			first += ';'+first
+	# Suponto first vetor de strings e second vetor de vértices
+	permutations = []
 
-	for i in range(len(second)):
-		for item in first.split(';')[i]:
-			if(item.split(',')[-1] != str(second[i])):
-				first.split(';')[i] += ',{}'.format(second[i])
-
-	return first
-	'''permutation = []
-	for i in range(len(second)):
-		permutation.append(deepcopy(first))
-
-	for i in range(len(second)):
-		permutation[i].append(second[i]);
-	print(permutation)
-	return permutation'''
+	for perm in itertools.product(first,second):
+		if(perm[0].split(',')[-1] != str(perm[1])):
+			permutations.append(perm[0]+str(perm[1]))
+			
+	return permutations
 
 
 def create_permutations(G):
 
 	G_deg_seq = degree_sequence(G)
 	f_degree = G_deg_seq[0]
-	first = all_to_str(nodes_with_degree(G, f_degree))
+	first = [all_to_str(nodes_with_degree(G, f_degree))]
 	G_deg_seq.pop(0)
 
 	while(len(G_deg_seq) > 0):
