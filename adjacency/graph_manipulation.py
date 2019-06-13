@@ -48,10 +48,9 @@ def create_permutation(first, second, f_degree, s_degree):
 			first += ';'+first
 
 	for i in range(len(second)):
-		for ind,item in enumerate(first[i]):
+		for item in first.split(';')[i]:
 			if(item.split(',')[-1] != str(second[i])):
 				first.split(';')[i] += ',{}'.format(second[i])
-		#permutation[i] += 
 
 	return first
 	'''permutation = []
