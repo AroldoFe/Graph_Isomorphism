@@ -81,5 +81,5 @@ $ python3.6 main.py
 
 Projeto desenvolvido pelos alunos:
 
-- 20170099774 - Aroldo Felix
-- 20170000600 - Gabriel Igor
+- Aroldo Felix (junioraroldo37@gmail.com)
+- Gabriel Igor (gabriel.igorq@gmail.com)
