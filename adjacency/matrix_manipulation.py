@@ -1,11 +1,12 @@
 import numpy as np
 
-def create_adjacency(G, max_num):
-	matrix = []
-	for i in range(max_num):
-		matrix.append([])
-		for j in range(max_num):
-			matrix[-1].append(0)
+'''
+	@Param G is the adjacency list that will be turn into a adjacency matrix
+	@Return the adjacency matrix created from adjacency list
+	@Complexity O(N^2)
+'''
+def create_adjacency(G):
+	matrix = np.zeros((len(G),len(G)))
 
 	for key, values in G.items():
 		for value in values:
@@ -13,6 +14,11 @@ def create_adjacency(G, max_num):
 
 	return matrix
 
+'''
+	@Param matrix that will be turn into a string
+	@Return string that shows tha matrix
+	@Complexity O(N^2)
+'''
 def show_matrix(matrix):
 	string = ''
 	for line in matrix:
@@ -21,56 +27,51 @@ def show_matrix(matrix):
 		string += '\n'
 	return string
 
+'''
+	@Param alpha is the bijection that will be turn into matrix
+	@Return the matrix
+	@Complexity O(N^2)
+'''
 def create_p(alpha):
-	matrix = []
-	for i in range(len(alpha[0])):
-		matrix.append([])
-		for j in range(len(alpha[1])):
-			matrix[-1].append(0)
+	matrix = np.zeros((len(alpha[0]),len(alpha[0])))
 
-	for i in alpha[0]:
-		j = alpha[1][i]
-		matrix[i][j] = 1
+	for i in range(len(alpha[0])):
+		matrix[alpha[0][i]][alpha[1][i]] = 1
 	
 	return matrix
 
+'''
+	@Param matrix that will be transposed
+	@Return the transposed matrix
+	@Complexity O(N^2)
+'''
 def transpose(matrix):
 	return matrix.transpose()
-	'''for j in range(len(matrix[0])): 
-		linha = []
-		for i in range(len(matrix)):
-			linha.append(matrix[i][j])
-		t_matrix.append(linha)
-	
-	return t_matrix'''
 
+'''
+	@Param A matrix A
+	@Param B matrix B
+	@Return AxB
+	@Complexity O(N^3)
+'''
 def matrix_multiply(A, B):
 	return np.dot(A,B)
-	'''result = []
-				if(len(A[0]) != len(B)):
-					return False
-			
-				for i in range(len(A)):
-					result.append([])
-					for j in range(len(B[0])):
-						result[-1].append(0)
-			
-				for i in range(len(A)):
-					for j in range(len(A[0])):
-						val = 0
-						for k in range(len(B[0])):
-							val = val + A[i][k]*B[k][j]
-						result[i][j] = val
-				return result'''
 
+'''
+	@Param A matrix A
+	@Param B matrix B
+	@Return True if A = B
+	@Complexity O(N^2)
+'''
 def matrix_equals(A, B):
 	a_shape = A.shape
 	b_shape = B.shape
-	if not(a_shape[0] != b_shape[0] or a_shape[1] != b_shape[1]):
+
+	if(a_shape[0] != b_shape[0] or a_shape[1] != b_shape[1]):
 		return False
 
-	for i in range(len[A]):
-		for j in range(len(A[0])):
+	for i in range(a_shape[0]):
+		for j in range(a_shape[1]):
 			if(A[i][j] != B[i][j]):
 				return False
 
