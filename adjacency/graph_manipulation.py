@@ -59,7 +59,7 @@ def degree_sequence(G):
 	@Complexity O(N^2)
 '''
 def same_degree_sequence(G, H):
-	if(degree_seguence(G) == degree_sequence(H)):
+	if(degree_sequence(G) == degree_sequence(H)):
 		return True
 	return False
 

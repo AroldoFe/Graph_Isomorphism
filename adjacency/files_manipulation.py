@@ -1,8 +1,12 @@
+import os
 ''' 
 	@Return a file read from some 'name.txt'
 '''
 def read_file():
-	file = input("Insira o nome do arquivo: ")
+	d = os.getcwd()
+	d1 = os.path.join(d, "casos_teste")
+	filename = input("Insira o nome do arquivo: ")
+	file = os.path.join(d1, filename)
 	read_file = open(file)
 	return read_file.read();
 

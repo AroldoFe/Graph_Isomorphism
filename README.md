@@ -74,7 +74,7 @@ $ python3.6 main.py
 
 1. Medidas para impedir ou corrigir o usuário caso informações erradas sejam inseridas pelo usuário, não foram implementadas. Logo, é natural que caso erre a escrita de um arquivo, erros sejam apresentados no terminal. Basta digitar nomes de arquivos existentes na pasta "compostos" que o programa irá executar normalmente.
 
-2. Como caso de teste inicial, para a pasta codes, é sugerido utilizar os arquivo dos compostos "metano.txt" e "silano.txt", que são mais simples, para facilitar o entendimento do funcionamento do programa.
+2. Como caso de teste inicial, para a pasta codes, é sugerido utilizar os arquivo dos compostos "metano.txt" e "silano.txt", que são mais simples, para facilitar o entendimento do funcionamento do programa. Em seguida, testar os arquivos "etano.txt" e "metilsilano.txt".
 
 
 ## Autores
